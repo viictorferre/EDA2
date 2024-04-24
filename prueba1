@@ -1,5 +1,7 @@
 #include <stdio.h>
 
-int a
-//hola
+int a;
+a=5;
 
+//hola
+printf('%d', a);
