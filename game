@@ -1,1 +1,147 @@
-//hola
+#include <stdio.h>
+#include <string.h>
+
+
+#define MAX_SKILLS 4
+#define MAX_OPTIONS 2
+#define MAX_ENEMIES 3
+
+// Define structs
+
+typedef struct {
+    char name[50];
+    char description[100];
+    int type; // 0 for direct attack, 1 for temporary modifier
+    int duration; // Duration in turns (if temporary)
+    int atk_modifier;
+    int def_modifier;
+    int hp_modifier;
+} Skill;
+
+typedef struct {
+    char name[20];
+    int hp;
+    int atk;
+    int def;
+    Skill skills[MAX_SKILLS];
+} Character;
+
+typedef struct {
+    char name[20];
+    char description[200];
+} Scenario;
+
+typedef struct {
+    char question[100];
+    char options[MAX_OPTIONS][50];
+    int num_options;
+} Decision;
+
+typedef struct {
+    char response[50];
+    char narrative_before[200];
+    char narrative_after[200];
+} Option;
+
+typedef struct {
+    char name[20];
+    int hp;
+    int atk;
+    int def;
+} Enemy;
+
+// Define scenarios
+Scenario scenarios[3] = {
+    {"Road to the Champions League",
+     "The FC Barcelona's journey to the Champions League begins in London, where Messi, Dani Alves, or Rakitic (player's choice) will face a 1 vs 1 combat against Manchester City to proceed to the next round."},
+    {"Clash in Paris",
+     "If the combat is won, Barcelona would travel to Paris, specifically to the Eiffel Tower, where they would face the mighty Paris Saint-Germain. Represented by Ibrahimovic, Marquinhos, and Thiago Silva."},
+    {"Battle at the Berlin Wall",
+     "The next challenge awaits at the Berlin Wall, where Barcelona faces off against Bayern Munich. Represented by Boateng, Ribery, and Robben."}
+};
+
+// Define decisions for each scenario
+Decision decisions[3] = {
+    {"Choose the location of the combat:",
+     {"Big Ben", "Buckingham Palace"},
+     2},
+    {"Choose your action at the Eiffel Tower:",
+     {"Climb the Eiffel Tower", "Stay at the base of the tower"},
+     2},
+    {"Choose your side of the wall:",
+     {"East side", "West side"},
+     2}
+};
+
+// Define enemies for each scenario
+Enemy enemies[3][MAX_ENEMIES] = {
+    {{"Aguero", 500, 50, 0}, {"Kompany", 750, 25, 0}, {"De Bruyne", 600, 40, 0}},
+    {{"Ibrahimovic", 750, 75, 0}, {"Marquinhos", 1000, 25, 0}, {"Thiago Silva", 1000, 25, 0}},
+    {{"Boateng", 1500, 25, 0}, {"Ribery", 500, 75, 0}, {"Robben", 500, 75, 0}}
+};
+
+// Define options for each decision
+Option options[3][MAX_OPTIONS] = {
+    {{"Big Ben chosen",
+      "The combat takes place atop the Big Ben.",
+      "Barcelona wins and proceeds to the next round."},
+     {"Buckingham Palace chosen",
+      "The combat takes place at the Buckingham Palace.",
+      "Barcelona wins and proceeds to the next round."}},
+    {{"Climb the Eiffel Tower",
+      "Barcelona climbs the Eiffel Tower for the combat.",
+      "Barcelona wins and proceeds to the next round."},
+     {"Stay at the base of the tower",
+      "Barcelona decides to stay at the base of the Eiffel Tower.",
+      "Barcelona wins and proceeds to the next round."}},
+    {{"East side chosen",
+      "Barcelona chooses to battle on the east side of the Berlin Wall.",
+      "Barcelona wins and proceeds to the next round."},
+     {"West side chosen",
+      "Barcelona chooses to battle on the west side of the Berlin Wall.",
+      "Barcelona wins and proceeds to the next round."}}
+};
+
+
+
+//Esto ni puta idea de com va, es per comprovar que s'imprimeix tot per pantalla.
+int main() {
+    // Print out initialized structs for each scenario
+    for (int i = 0; i < 3; ++i) {
+        printf("Scenario %d: %s\n", i + 1, scenarios[i].description);
+        printf("Decision: %s\n", decisions[i].question);
+        for (int j = 0; j < decisions[i].num_options; ++j) {
+            printf("  Option %d: %s\n", j + 1, decisions[i].options[j]);
+            printf("    Description: %s\n", options[i][j].narrative_before);
+            printf("    Outcome: %s\n", options[i][j].narrative_after);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
