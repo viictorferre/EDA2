@@ -4,11 +4,10 @@
 
 #define MAX_SKILLS 4
 #define MAX_OPTIONS 2
-#define MAX_ENEMIES 6
+#define MAX_ENEMIES 4
+#define MAX_SCENARIOS 4
 
 // Define structs
-
-
 typedef struct {
     char name[50];
     char description[100];
@@ -53,6 +52,11 @@ typedef struct {
     char narrative_after[200];
 } Option;
 
+void main_menu();
+void start_new_game();
+void configure_character();
+void test_skill_selection();
+
 
 void main_menu() {
     printf("Welcome to the Game!\n");
@@ -86,32 +90,39 @@ void main_menu() {
     main_menu();
 }
 
-// Define scenarios
-Scenario scenarios[3] = {
-    {"Road to the Champions League Final Battle",
-     "FC Barcelona's journey to the Champions League begins in London, where Messi, Dani Alves, or Rakitic (player's choice) will face a 1 vs 1 combat against Manchester City to proceed to the next round."},
-    {"Clash in Paris",
-     "If the combat is won, Barcelona would travel to Paris, specifically to the Eiffel Tower, where they would face the mighty Paris Saint-Germain. Represented by Ibrahimovic, Marquinhos, and Thiago Silva."},
-    {"Battle at the Berlin Wall",
-     "The next challenge awaits at the Berlin Wall, where Barcelona faces off against Bayern Munich. Represented by Boateng, Ribery, and Robben."}
-    {"Final battle at the Roman Coliseum",
-     "The final challenge has arrived after overcoming all previous battles, Barcelona now faces off against Juventus, the glorious italian team."}
+// Define scenarios, decisions, enemies, and options
+Scenario scenarios[MAX_SCENARIOS] = {
+    {"London", "FC Barcelona's journey to the Champions League begins in London, where Messi, Dani Alves, or Rakitic (player's choice) will face a 1 vs 1 combat against Manchester City to proceed to the next round."},
+    {"Paris", "FC Barcelona travel to Paris, specifically to the Eiffel Tower, where they face the mighty Paris Saint-Germain. Represented by Ibrahimovic, Marquinhos, and Thiago Silva."},
+    {"Berlin", "The next challenge awaits at the Berlin Wall, where Barcelona faces off against Bayern Munich. Represented by Boateng, Ribery, and Robben."},
+    {"Rome", "Final battle at the Roman Coliseum. The final challenge has arrived after overcoming all previous battles, Barcelona now faces off against Juventus, the glorious Italian team."}
 };
 
-Scenario London = {"London", "We are in london tal tal"}
-
-// Define decisions for each scenario
-Decision decisions[3] = {
-    {"Choose the location of the combat:",
-     {"Big Ben", "Buckingham Palace"},
-     2},
-    {"Choose your action at the Eiffel Tower:",
-     {"Climb the Eiffel Tower", "Stay at the base of the tower"},
-     2},
-    {"Choose your side of the wall:",
-     {"East side", "West side"},
-     2}
+Decision decisions[MAX_SCENARIOS] = {
+    {"Choose the location of the combat:", {"Big Ben", "Buckingham Palace"}, 2},
+    {"Choose your action at the Eiffel Tower:", {"Climb the Eiffel Tower", "Stay at the base of the tower"}, 2},
+    {"Choose your side of the Berlin Wall:", {"East side", "West side"}, 2},
+    {"Choose your response to Buffon:", {"May the best win", "I will crush you"}, 2}
 };
+
+Enemy enemies[MAX_SCENARIOS][MAX_ENEMIES] = {
+    {{"Kompany", 750, 25, 75}, {"Aguero", 500, 50, 25}},
+    {{"Ibrahimovic", 750, 75, 25}, {"Marquinhos", 1000, 25, 75}, {"Thiago Silva", 1000, 25, 75}},
+    {{"Boateng", 1500, 25, 75}, {"Robben", 500, 75, 50}, {"Ribery", 500, 75, 50}},
+    {{"Bonucci", 1500, 35, 90}, {"Pogba", 800, 50, 50}, {"Pirlo", 800, 50, 50}, {"Buffon", 1500, 25, 75}}
+};
+
+Option options[MAX_SCENARIOS][MAX_OPTIONS] = {
+    {{"Big Ben chosen", "The combat takes place atop the Big Ben.", "Barcelona wins and proceeds to the next round."},
+     {"Buckingham Palace chosen", "The combat takes place at the Buckingham Palace.", "Barcelona wins and proceeds to the next round."}},
+    {{"Climb the Eiffel Tower", "Barcelona climbs the Eiffel Tower for the combat.", "Barcelona wins and proceeds to the next round."},
+     {"Stay at the base of the tower", "Barcelona decides to stay at the base of the Eiffel Tower.", "Barcelona wins and proceeds to the next round."}},
+    {{"East side chosen", "Barcelona chooses to battle on the east side of the Berlin Wall.", "Barcelona wins and proceeds to the next round."},
+     {"West side chosen", "Barcelona chooses to battle on the west side of the Berlin Wall.", "Barcelona wins and proceeds to the next round."}},
+    {{"May the best win", "Barcelona responds: May the best win.", "Barcelona wins and proceeds to the next round."},
+     {"I will crush you", "Barcelona responds: I will crush you.", "Barcelona wins and proceeds to the next round."}}
+};
+
 
 // Define enemies for each scenario
 Enemy enemies[4][MAX_ENEMIES] = {
@@ -121,31 +132,8 @@ Enemy enemies[4][MAX_ENEMIES] = {
     {{"Chiellini", 1500, 25, 0}, {"Bonucci", 500, 75, 0}, {"Pirlo", 500, 75, 0}, {"Pogba", 1500, 25, 0}, {"Vidal", 500, 75, 0}, {"Buffon", 500, 75, 0} }
 };
 
-// Define options for each decision
-Option options[3][MAX_OPTIONS] = {
-    {{"Big Ben chosen",
-      "The combat takes place atop the Big Ben.",
-      "Barcelona wins and proceeds to the next round."},
-     {"Buckingham Palace chosen",
-      "The combat takes place at the Buckingham Palace.",
-      "Barcelona wins and proceeds to the next round."}},
-    {{"Climb the Eiffel Tower",
-      "Barcelona climbs the Eiffel Tower for the combat.",
-      "Barcelona wins and proceeds to the next round."},
-     {"Stay at the base of the tower",
-      "Barcelona decides to stay at the base of the Eiffel Tower.",
-      "Barcelona wins and proceeds to the next round."}},
-    {{"East side chosen",
-      "Barcelona chooses to battle on the east side of the Berlin Wall.",
-      "Barcelona wins and proceeds to the next round."},
-     {"West side chosen",
-      "Barcelona chooses to battle on the west side of the Berlin Wall.",
-      "Barcelona wins and proceeds to the next round."}}
-};
 
-
-
-//Esto ni puta idea de com va, es per comprovar que s'imprimeix tot per pantalla.
+//Esto ni idea de com va
 int main() {
 
     main_menu();
@@ -161,8 +149,6 @@ int main() {
         }
         printf("\n");
     }
-
-
     return 0;
 }
 ;
