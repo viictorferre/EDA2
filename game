@@ -50,6 +50,39 @@ typedef struct {
     int def;
 } Enemy;
 
+
+void main_menu() {
+    printf("Welcome to the Game!\n");
+    printf("1. Start New Game\n");
+    printf("2. Configure Character\n");
+    printf("3. Test Skill Selection\n");
+    printf("4. Exit\n");
+
+    int choice;
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            start_new_game();
+            break;
+        case 2:
+            configure_character();
+            break;
+        case 3:
+            test_skill_selection();
+            break;
+        case 4:
+            printf("Exiting the game...\n");
+            return;
+        default:
+            printf("Invalid choice. Please enter a number between 1 and 4.\n");
+    }
+
+    // After each action, return to the main menu
+    main_menu();
+}
+
 // Define scenarios
 Scenario scenarios[3] = {
     {"Road to the Champions League",
@@ -106,6 +139,9 @@ Option options[3][MAX_OPTIONS] = {
 
 //Esto ni puta idea de com va, es per comprovar que s'imprimeix tot per pantalla.
 int main() {
+
+    main_menu();
+
     // Print out initialized structs for each scenario
     for (int i = 0; i < 3; ++i) {
         printf("Scenario %d: %s\n", i + 1, scenarios[i].description);
@@ -118,30 +154,8 @@ int main() {
         printf("\n");
     }
 
+
     return 0;
 }
 ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
