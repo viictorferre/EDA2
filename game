@@ -130,7 +130,11 @@ Enemy enemies[4][MAX_ENEMIES] = {
     {{"Chiellini", 1500, 25, 0}, {"Bonucci", 500, 75, 0}, {"Pirlo", 500, 75, 0}, {"Pogba", 1500, 25, 0}, {"Vidal", 500, 75, 0}, {"Buffon", 500, 75, 0} }
 };
 
+// Define skills for each character
+Skill skills[4][MAX_ENEMIES] = {
+    {{"Armor", "you receive only 25 per cent of damage in the next 10 turns.", 1, 10, 0, 0, 0}},
 
+};
 
 
 
