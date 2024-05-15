@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdbool.h>
 
 #define MAX_SKILLS 4
 #define MAX_OPTIONS 2
-#define MAX_ENEMIES 3
+#define MAX_ENEMIES 6
 
 // Define structs
+
 
 typedef struct {
     char name[50];
@@ -26,10 +27,18 @@ typedef struct {
     Skill skills[MAX_SKILLS];
 } Character;
 
+
 typedef struct {
     char name[20];
-    char description[200];
+    char description[300];
 } Scenario;
+
+typedef struct {
+    char name[20];
+    int hp;
+    int atk;
+    int def;
+} Enemy;
 
 typedef struct {
     char question[100];
@@ -40,15 +49,9 @@ typedef struct {
 typedef struct {
     char response[50];
     char narrative_before[200];
+    Enemy enemies[MAX_ENEMIES];
     char narrative_after[200];
 } Option;
-
-typedef struct {
-    char name[20];
-    int hp;
-    int atk;
-    int def;
-} Enemy;
 
 
 void main_menu() {
@@ -85,13 +88,17 @@ void main_menu() {
 
 // Define scenarios
 Scenario scenarios[3] = {
-    {"Road to the Champions League",
-     "The FC Barcelona's journey to the Champions League begins in London, where Messi, Dani Alves, or Rakitic (player's choice) will face a 1 vs 1 combat against Manchester City to proceed to the next round."},
+    {"Road to the Champions League Final Battle",
+     "FC Barcelona's journey to the Champions League begins in London, where Messi, Dani Alves, or Rakitic (player's choice) will face a 1 vs 1 combat against Manchester City to proceed to the next round."},
     {"Clash in Paris",
      "If the combat is won, Barcelona would travel to Paris, specifically to the Eiffel Tower, where they would face the mighty Paris Saint-Germain. Represented by Ibrahimovic, Marquinhos, and Thiago Silva."},
     {"Battle at the Berlin Wall",
      "The next challenge awaits at the Berlin Wall, where Barcelona faces off against Bayern Munich. Represented by Boateng, Ribery, and Robben."}
+    {"Final battle at the Roman Coliseum",
+     "The final challenge has arrived after overcoming all previous battles, Barcelona now faces off against Juventus, the glorious italian team."}
 };
+
+Scenario London = {"London", "We are in london tal tal"}
 
 // Define decisions for each scenario
 Decision decisions[3] = {
@@ -107,10 +114,11 @@ Decision decisions[3] = {
 };
 
 // Define enemies for each scenario
-Enemy enemies[3][MAX_ENEMIES] = {
+Enemy enemies[4][MAX_ENEMIES] = {
     {{"Aguero", 500, 50, 0}, {"Kompany", 750, 25, 0}, {"De Bruyne", 600, 40, 0}},
     {{"Ibrahimovic", 750, 75, 0}, {"Marquinhos", 1000, 25, 0}, {"Thiago Silva", 1000, 25, 0}},
     {{"Boateng", 1500, 25, 0}, {"Ribery", 500, 75, 0}, {"Robben", 500, 75, 0}}
+    {{"Chiellini", 1500, 25, 0}, {"Bonucci", 500, 75, 0}, {"Pirlo", 500, 75, 0}, {"Pogba", 1500, 25, 0}, {"Vidal", 500, 75, 0}, {"Buffon", 500, 75, 0} }
 };
 
 // Define options for each decision
