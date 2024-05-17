@@ -132,8 +132,11 @@ Enemy enemies[4][MAX_ENEMIES] = {
 
 // Define skills for each character
 Skill skills[4][MAX_ENEMIES] = {
-    {{"Armor", "you receive only 25 per cent of damage in the next 10 turns.", 1, 10, 0, 0, 0}},
-
+    {{"Armor", "you receive only 25 per cent of damage in the next 10 turns.", 1, 10, 0, *1.25, 0}},
+    {{"Super Agility", "for the next 10 turns you have 25 per cent change of dodging your opponent's attack and receive 0 damage", 1, 10, 0, 0, 0}},
+    {{"Bandage", "+500 hp for your character", 0, 0, 0, 0, +500}},
+    {{"Mega Attack", "yout attack will be 50 per cent more powerful", 0, 0, *1.5, 0, 0}}
+    {{"Mirror", "your opponent's next attack will bounce on your shield and hurt them.", 1, 1, 0, 0, 0}}
 };
 
 
