@@ -1,7 +1,0 @@
-#include <stdio.h>
-
-int a;
-a=444;
-
-//hola
-printf('%d', a);
