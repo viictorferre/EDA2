@@ -9,9 +9,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "main.h" // Include the header file containing the structs
->>>>>>> 4619352d38013a92ca6153ee65dffe382dc01800
 
-<<<<<<< HEAD
 void main_menu() {
     printf("Welcome to the Game!\n");
     printf("1. Start New Game\n");
