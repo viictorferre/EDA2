@@ -4,10 +4,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
-=======
-#include <stdio.h>
-#include <string.h>
-#include <stdbool.h>
 #include "main.h" // Include the header file containing the structs
 
 void main_menu() {
