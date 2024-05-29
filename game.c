@@ -229,6 +229,11 @@ Character chooseCharacter() {
 }
 
 void chooseSkills(Character* character) {
+    clock_t start_time, end_time;
+    double cpu_time_used;
+    
+    start_time = clock();
+    
     int choice;
     int chosenSkills[4] = {-1, -1, -1, -1}; // Array to store chosen skill indices
     printf("Choose 4 skills from the following list:\n");
@@ -269,7 +274,13 @@ void chooseSkills(Character* character) {
         printf("%s: %s (Uses left: %d)\n", character->skills[i].name, character->skills[i].description, character->skills[i].uses_left);
     }
     printf("\033[0m");
+
+    end_time = clock();
+    cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+    printf("Time taken to choose skills: %f seconds\n", cpu_time_used);
 }
+
+
 
 void setupScenarios() {
     Scenario tempScenarios[] = {
@@ -367,7 +378,6 @@ void initializeStack(Stack* s) {
     s->top = NULL;
 }
 
-// Modified combat function
 void combat(Character* player, Enemy* enemy) {
     srand(time(NULL));
     printf("\n--- Combat Start! ---\n");
@@ -379,8 +389,13 @@ void combat(Character* player, Enemy* enemy) {
     Stack move_stack;
     initializeStack(&move_stack);
 
+    clock_t start_time, end_time;
+    double cpu_time_used;
+
     while (player->hp > 0 && enemy->hp > 0) {
         printf("\n--- Turn %d ---\n", turn_count); // Display turn count
+
+        start_time = clock(); // Start time measurement for player's turn
 
         int player_choice;
         printf("\033[34m");
@@ -457,8 +472,14 @@ void combat(Character* player, Enemy* enemy) {
             break;
         }
 
+        end_time = clock(); // End time measurement for player's turn
+        cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+        printf("Time taken for player's turn: %f seconds\n", cpu_time_used);
+
         printf("\033[0;31m");
         printf("\nEnemy's turn!\n");
+
+        start_time = clock(); // Start time measurement for enemy's turn
 
         int enemy_choice = rand() % 5;
         int enemy_damage = 0;
@@ -497,9 +518,15 @@ void combat(Character* player, Enemy* enemy) {
         printf("\n%s HP: %d\n", player->name, player->hp);
         printf("%s HP: %d\n", enemy->name, enemy->hp);
 
+        end_time = clock(); // End time measurement for enemy's turn
+        cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+        printf("Time taken for enemy's turn: %f seconds\n", cpu_time_used);
+
         turn_count++; // Increment turn count
     }
 }
+
+
 
 
 // Menu function
